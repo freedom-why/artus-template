@@ -1,0 +1,31 @@
+{
+  "name": "artus-template",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode devlopment",
+    "build-qiankun": "vite build --mode qiankun",
+    "build-artus": "vite build --mode artus",
+    "build-dualmode": "vite build --mode dualmode"
+  },
+  "dependencies": {
+    "element-plus": "^2.7.2",
+    "animate.css": "^4.1.1",
+    "artus-components": "^0.0.67",
+    "axios": "^1.3.5",
+    "sass": "^1.61.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "unplugin-auto-import": "^0.15.2",
+    "unplugin-vue-components": "^0.24.1",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-qiankun": "^1.0.15",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "unplugin-vue-define-options": "^1.3.3",
+    "vite": "^4.2.0"
+  }
+}
