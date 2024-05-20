@@ -9,16 +9,16 @@ import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import qiankunPlugin from 'vite-plugin-qiankun'
 import { createHtmlPlugin } from 'vite-plugin-html'
-
+import packageInfor from './package.json'
 
 export default async ({command, mode}) => {
     const envConfig = loadEnv(mode, './')
     const p = {
         artus: [excludePublicFilesPlugin(['mars3d-cesium'])],
-        qiankun: [qiankunPlugin(envConfig.VITE_QIANKUN, { // 微应用名字，与主应用注册的微应用名字保持一致
+        qiankun: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
             useDevMode: true
         })],
-        dualmode: [qiankunPlugin(envConfig.VITE_QIANKUN, { // 微应用名字，与主应用注册的微应用名字保持一致
+        dualmode: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
             useDevMode: true
         })],
         artusTemplate: []
