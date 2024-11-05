@@ -1,11 +1,11 @@
 import path from 'path'
 import fs from 'fs'
-import {defineConfig, loadEnv} from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import viteCompression from 'vite-plugin-compression'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import qiankunPlugin from 'vite-plugin-qiankun'
 import { createHtmlPlugin } from 'vite-plugin-html'
@@ -14,21 +14,19 @@ import packageInfor from './package.json'
 export default async ({command, mode}) => {
     const envConfig = loadEnv(mode, './')
     const p = {
-        artus: [excludePublicFilesPlugin(['mars3d-cesium'])],
-        qiankun: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
-            useDevMode: true
-        })],
-        dualmode: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
-            useDevMode: true
-        })],
-        artusTemplate: []
-    }
-    const importStyle = {
-        artus:true,
-        qiankun:false,
-        dualmode:true,
-        artusTemplate:true,
-    }
+        artus: {importStyle: true, plugins: [excludePublicFilesPlugin(['mars3d-cesium'])]},
+        qiankun: {
+            importStyle: false, plugins: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
+                useDevMode: true
+            })]
+        },
+        dualmode: {
+            importStyle: true, plugins: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
+                useDevMode: true
+            })]
+        },
+        artusTemplate: {importStyle: true, plugins: []}
+    }[envConfig.VITE_NODE_ENV]
     return defineConfig({
         define: {
             'process.env': {}
@@ -84,7 +82,7 @@ export default async ({command, mode}) => {
             },
             rollupOptions: {
                 output: {
-                    manualChunks(id) { //静态资源分拆打包
+                    manualChunks (id) { //静态资源分拆打包
                         if (id.includes('node_modules')) {
                             return id.toString().split('node_modules/')[1].split('/')[0].toString();
                         }
@@ -104,10 +102,10 @@ export default async ({command, mode}) => {
                 ext: '.gz'
             }),
             createHtmlPlugin({
-                minify:true,
-                filename:"index",//该项默认是template文件名
-                entry: envConfig.VITE_INPUT  || 'src/main.js',
-                template:"./index.html",
+                minify: true,
+                filename: "index",//该项默认是template文件名
+                entry: envConfig.VITE_INPUT || 'src/main.js',
+                template: "./index.html",
                 inject: {
                     data: {
                         injectScript: `<script src="./config.js"></script>`
@@ -125,25 +123,25 @@ export default async ({command, mode}) => {
             Components({
                 resolvers: [
                     ElementPlusResolver(
-                        {importStyle: importStyle?.[envConfig.VITE_NODE_ENV]}
+                        {importStyle: p.importStyle}
                     )
                 ]
             }),
-            ...p?.[envConfig.VITE_NODE_ENV]
+            ...p.plugins
         ]
 
     })
 }
 
-function excludePublicFilesPlugin(excludePaths) {
+function excludePublicFilesPlugin (excludePaths) {
     const publicDir = path.resolve(__dirname, 'dist')
 
     return {
         name: 'exclude-public-files',
-        buildStart() {
+        buildStart () {
             this.addWatchFile('public') // 确保 Vite 监听 `public` 文件夹
         },
-        generateBundle(options, bundle) {
+        generateBundle (options, bundle) {
             // 读取并移除不需要的文件
             excludePaths.forEach(excludePath => {
                 const fullPath = path.resolve(publicDir, excludePath);
