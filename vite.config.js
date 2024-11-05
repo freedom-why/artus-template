@@ -23,6 +23,12 @@ export default async ({command, mode}) => {
         })],
         artusTemplate: []
     }
+    const importStyle = {
+        artus:true,
+        qiankun:false,
+        dualmode:true,
+        artusTemplate:true,
+    }
     return defineConfig({
         define: {
             'process.env': {}
@@ -109,19 +115,17 @@ export default async ({command, mode}) => {
                 }
 
             }),
-            AutoImport({
-                resolvers: [
-                    ElementPlusResolver({
-                        importStyle: 'scss' // 指示element-plus使用预处理样式
-                    })
-                ]
-            }),
+            // AutoImport({
+            //     resolvers: [
+            //         ElementPlusResolver({
+            //             importStyle: 'scss' // 指示element-plus使用预处理样式
+            //         })
+            //     ]
+            // }),
             Components({
                 resolvers: [
                     ElementPlusResolver(
-                        {
-                            importStyle: 'scss' // 指示element-plus使用预处理样式
-                        }
+                        {importStyle: importStyle?.[envConfig.VITE_NODE_ENV]}
                     )
                 ]
             }),

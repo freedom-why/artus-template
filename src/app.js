@@ -48,7 +48,6 @@ export function appInit(container, routerConfig = {}, props) {
 const styleFun = async () => {
     // await import("@/assets/styles/element.css")
     await import("animate.css")
-    await import("element-plus/dist/index.css")
     await import("@/assets/styles/selfStyle.scss")
     await import ('element-plus/theme-chalk/dark/css-vars.css')
 }
