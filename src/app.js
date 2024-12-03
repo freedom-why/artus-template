@@ -28,7 +28,6 @@ export function appInit(container, routerConfig = {}, props) {
             app = createApp(layout, {
                 style: style,
             })
-            styleFun()
         }
         app.use(artusComponents.default)
         app.use(router(routerConfig, props))
@@ -43,11 +42,4 @@ export function appInit(container, routerConfig = {}, props) {
         artusComponents.componentConfig.auth = directive.fun
         resolve(app)
     })
-}
-
-const styleFun = async () => {
-    // await import("@/assets/styles/element.css")
-    await import("animate.css")
-    await import("@/assets/styles/selfStyle.scss")
-    await import ('element-plus/theme-chalk/dark/css-vars.css')
 }

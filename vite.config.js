@@ -47,7 +47,7 @@ export default async ({command, mode}) => {
             preprocessorOptions: {
                 scss: {
                     //注意这里sass变成了scss
-                    additionalData: `@import "@/assets/styles/variables.scss";`
+                    additionalData: `@import "@/assets/styles/variables.scss";@import "animate.css";`
                 }
             }
         },
@@ -108,18 +108,18 @@ export default async ({command, mode}) => {
                 template: "./index.html",
                 inject: {
                     data: {
-                        injectScript: `<script src="./config.js"></script>`
+                        injectScript: injectScript(p)
                     }
                 }
 
             }),
-            // AutoImport({
-            //     resolvers: [
-            //         ElementPlusResolver({
-            //             importStyle: 'scss' // 指示element-plus使用预处理样式
-            //         })
-            //     ]
-            // }),
+            AutoImport({
+                resolvers: [
+                    ElementPlusResolver({
+                        importStyle: 'scss' // 指示element-plus使用预处理样式
+                    })
+                ]
+            }),
             Components({
                 resolvers: [
                     ElementPlusResolver(
@@ -132,7 +132,14 @@ export default async ({command, mode}) => {
 
     })
 }
-
+function injectScript(p) {
+    let s = `<script src="./config.js"></script>`
+    if (p.importStyle) {
+        s += `<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" /> `
+        s += `<link rel="stylesheet" href="//unpkg.com/element-plus/theme-chalk/dark/css-vars.css" /> `
+    }
+    return s
+}
 function excludePublicFilesPlugin (excludePaths) {
     const publicDir = path.resolve(__dirname, 'dist')
 

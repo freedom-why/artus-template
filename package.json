@@ -10,11 +10,10 @@
   },
   "dependencies": {
     "element-plus": "^2.7.2",
-    "animate.css": "^4.1.1",
-    "artus-components": "^0.0.67",
+    "artus-components": "^0.2.2",
     "axios": "^1.3.5",
     "sass": "^1.61.0",
-    "vue": "^3.2.47",
+    "vue": "^3.5.13",
     "vue-router": "^4.1.6",
     "vuex": "^4.1.0"
   },

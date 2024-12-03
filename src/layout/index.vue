@@ -3,18 +3,18 @@
     <div class="flex-start" style="height: 100%;">
       <div class="left-nav-style">
         <el-menu
-            :default-active="activeIndex"
+            :default-active="route.path"
             class="nav-list"
             background-color="rgba(0,0,0,0)"
             text-color="#909499"
             router
             active-text-color="#fff"
         >
-          <el-menu-item v-for="item in navList" :index="item.id">
+          <el-menu-item v-for="item in navList" :index="item.name">
             <el-icon>
-              <component :is="item.icon"></component>
+              <component :is="item?.meta?.icon"></component>
             </el-icon>
-            {{ item.name }}
+            {{ item?.meta?.title }}
           </el-menu-item>
         </el-menu>
       </div>
@@ -32,17 +32,10 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
-const activeIndex = ref('/example')
-
-const navList = ref([
-  {
-    name: '实例',
-    icon: 'OfficeBuilding',
-    id: '/example'
-  }
-])
-
+import { useRouter,useRoute } from 'vue-router'
+const route = useRoute()
+const {options:{routes}} = useRouter()
+const navList = routes.filter(ref => ref.name !== 'root')
 </script>
 
 <style lang="scss" scoped>

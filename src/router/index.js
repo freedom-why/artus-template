@@ -45,6 +45,12 @@ function List(list, routerListAll, rootGateWay) {
             name: '/example',
             meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
             component: routerPatch['/example']
+        },
+        {
+            path: '/example1',
+            name: '/example1',
+            meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
+            component: routerPatch['/example']
         }
     ]
 }
