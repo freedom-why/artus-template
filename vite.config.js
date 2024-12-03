@@ -47,7 +47,7 @@ export default async ({command, mode}) => {
             preprocessorOptions: {
                 scss: {
                     //注意这里sass变成了scss
-                    additionalData: `@import "@/assets/styles/variables.scss";@import "animate.css";`
+                    additionalData: `@import "@/assets/styles/variables.scss";`
                 }
             }
         },
