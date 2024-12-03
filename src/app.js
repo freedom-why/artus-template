@@ -10,14 +10,10 @@ import '@/assets/styles/fonts/iconfont.css'
 import * as directive from '@/directive/auth'
 
 export function appInit (container, routerConfig = {}, props) {
-    let style = ''
-    if (container) {
-        style = 'padding:10px'
-    }
     return new Promise(resolve => {
         loadLayout(container).then(d => {
             let app = createApp(d.default, {
-                style: style,
+                style: 'padding:10px',
             })
             app.use(artusComponents.default)
             app.use(router(routerConfig, props))
