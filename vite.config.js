@@ -132,14 +132,16 @@ export default async ({command, mode}) => {
 
     })
 }
-function injectScript(p) {
-    let s = `<script src="./config.js"></script>`
+
+function injectScript (p) {
+    let s = ''
     if (p.importStyle) {
         s += `<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" /> `
         s += `<link rel="stylesheet" href="//unpkg.com/element-plus/theme-chalk/dark/css-vars.css" /> `
     }
     return s
 }
+
 function excludePublicFilesPlugin (excludePaths) {
     const publicDir = path.resolve(__dirname, 'dist')
 
