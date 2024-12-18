@@ -62,7 +62,7 @@ export default async ({command, mode}) => {
             },
             disableHostCheck: true,
             //host: "localhost",
-            port: 5177, // 端口号
+           // port: 5177, // 端口号
             proxy: {
                 '/api/': { // 可视化平台服务
                     target: 'http://139.186.201.161:8100/',
