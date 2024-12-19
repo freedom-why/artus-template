@@ -38,19 +38,35 @@ function List(list, routerListAll, rootGateWay) {
         {
             path: '/',
             name: 'root',
-            redirect: '/example',
+            meta: {hidden: true},
+            redirect: '/login',
         },
         {
-            path: '/example',
-            name: '/example',
-            meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
-            component: routerPatch['/example']
+            path: '/login',
+            name: '/login',
+            hidden: true,
+            meta: {title: '登录', hidden: true, btnJurisdiction: ['change', 'delete'], icon: 'OfficeBuilding'},
+            component: () => import('@/views/login/index.vue')
         },
         {
-            path: '/example1',
-            name: '/example1',
-            meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
-            component: routerPatch['/example']
+            path: '/content',
+            name: '/content',
+            meta: {hidden: true},
+            component: () => import('@/layout/index.vue'),
+            children: [
+                {
+                    path: '/example',
+                    name: '/example',
+                    meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
+                    component: routerPatch['/example']
+                },
+                {
+                    path: '/example1',
+                    name: '/example1',
+                    meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
+                    component: routerPatch['/example']
+                }
+            ]
         }
     ]
 }

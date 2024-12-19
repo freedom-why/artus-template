@@ -8,34 +8,29 @@
             background-color="rgba(0,0,0,0)"
             text-color="#909499"
             router
-            active-text-color="#fff"
-        >
-          <el-menu-item v-for="item in navList" :index="item.name">
-            <el-icon>
-              <component :is="item?.meta?.icon"></component>
-            </el-icon>
-            {{ item?.meta?.title }}
-          </el-menu-item>
+            active-text-color="#fff">
+          <sidebar-item v-for="(route,index) in routes" :key="route.path" :item="route"/>
         </el-menu>
       </div>
       <div class="child-content">
         <router-view v-slot="{ Component,route }">
           <transition name="animate__animated animate__fadeOut" mode="out-in"
                       enter-active-class="animate__fadeInUp" leave-active-class="animate__fadeOutUp">
-            <component style="height: 100%"  :is="Component" :key="route.name"/>
+            <component style="height: 100%" :is="Component" :key="route.name"/>
           </transition>
         </router-view>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup>
-import { useRouter,useRoute } from 'vue-router'
+import SidebarItem from './SidebarItem.vue'
+import { useRouter, useRoute } from 'vue-router'
+
 const route = useRoute()
-const {options:{routes}} = useRouter()
-const navList = routes.filter(ref => ref.name !== 'root')
+const {options: {routes}} = useRouter()
+
 </script>
 
 <style lang="scss" scoped>

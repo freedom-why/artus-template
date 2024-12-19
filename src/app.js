@@ -37,6 +37,6 @@ async function loadLayout (type) {
         artusComponents.componentConfig.namespace = 'why'
         return await import ('./App.vue')
     }
-    return await import('@/layout/index.vue')
+    return await import('./App2.vue')
 }
 
