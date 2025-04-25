@@ -147,7 +147,6 @@ export default async ({command, mode}) => {
 function injectScript (p) {
     let s = ''
     if (p.importStyle) {
-        s += `<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" /> `
         s += `<link rel="stylesheet" href="//unpkg.com/element-plus/theme-chalk/dark/css-vars.css" /> `
     }
     return s
