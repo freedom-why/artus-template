@@ -13,24 +13,31 @@ import packageInfor from './package.json'
 
 export default async ({command, mode}) => {
     const envConfig = loadEnv(mode, './')
+
     const p = {
-        artus: {importStyle: true,
-            plugins: [excludePublicFilesPlugin(['mars3d-cesium'])]
+        artus: {
+            importStyle: true,
+            plugins: [excludePublicFilesPlugin(['mars3d-cesium'])],
+            additionalData: `@import "@/assets/styles/variables.scss";@import "@/assets/styles/selfStyle.scss";`
         },
         qiankun: {
             importStyle: false,
             plugins: [
                 qiankunPlugin(packageInfor.name, {useDevMode: true}),
                 initHtml()
-            ]
+            ],
+            additionalData: `@import "@/assets/styles/variables.scss";`
         },
         dualmode: {
             importStyle: true, plugins: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
-                useDevMode: true
-            }),initHtml()]
+                useDevMode: true,
+                additionalData: `@import "@/assets/styles/variables.scss";@import "@/assets/styles/selfStyle.scss";`
+            }), initHtml()]
         },
-        artusTemplate: {importStyle: true, plugins: []}
-    }[envConfig.VITE_NODE_ENV]
+        artusTemplate: {importStyle: true, plugins: [],  additionalData: `@import "@/assets/styles/variables.scss";@import "@/assets/styles/selfStyle.scss";`}
+    }
+    const modeType = p[envConfig.VITE_NODE_ENV]
+        console.log(modeType.additionalData)
     return defineConfig({
         define: {
             'process.env': {}
@@ -51,7 +58,7 @@ export default async ({command, mode}) => {
             preprocessorOptions: {
                 scss: {
                     //注意这里sass变成了scss
-                    additionalData: `@import "@/assets/styles/variables.scss";`
+                    additionalData: modeType.additionalData
                 }
             }
         },
@@ -112,7 +119,7 @@ export default async ({command, mode}) => {
                 template: "./index.html",
                 inject: {
                     data: {
-                        injectScript: injectScript(p)
+                        injectScript: injectScript(modeType)
                     }
                 }
 
@@ -120,18 +127,18 @@ export default async ({command, mode}) => {
             AutoImport({
                 resolvers: [
                     ElementPlusResolver({
-                        importStyle: 'scss' // 指示element-plus使用预处理样式
+                        importStyle: modeType.importStyle // 指示element-plus使用预处理样式
                     })
                 ]
             }),
             Components({
                 resolvers: [
                     ElementPlusResolver(
-                        {importStyle: p.importStyle}
+                        {importStyle: modeType.importStyle}
                     )
                 ]
             }),
-            ...p.plugins
+            ...modeType.plugins
         ]
 
     })
