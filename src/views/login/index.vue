@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container ceshiStyle" :style="`background-image: url(${info.bgUrl || loginBg})`">
+  <div class="login-container ceshiStyle" :style="`background-image: url(${info.bgUrl})`">
     <div class="login-box">
       <h5 class="title">{{ info.title }}</h5>
       <el-row class="login-box-style">
@@ -46,7 +46,6 @@
 
 <script>
 import { ref, reactive, toRefs } from 'vue'
-import loginBg from '@/assets/images/login_bg.png'
 import { useRouter } from 'vue-router'
 import { ElMessage } from "element-plus"
 // import {login} from '@/api'
@@ -94,7 +93,7 @@ export default {
         }
       })
     }
-    return {...toRefs(data), handleLogin, ruleForm, info, loginBg}
+    return {...toRefs(data), handleLogin, ruleForm, info}
   }
 }
 </script>

@@ -1,14 +1,12 @@
 <template>
-  <leftRightTem class="artus_datalargeScreen_index_left">
+  <leftRightTem>
     <template v-slot:left>
       weqweqweqw
     </template>
-    <template #rightHeader="{slotClass }">
-      <div v-auth="'change'" class="flex-start" :class="slotClass">
+    <template v-slot:right>
+      <div v-auth="'change'" class="flex-start basic-box padding_10 margin-b_10">
         <el-button type="primary">按钮模板</el-button>
       </div>
-    </template>
-    <template v-slot:right>
       <artus-table></artus-table>
     </template>
   </leftRightTem>

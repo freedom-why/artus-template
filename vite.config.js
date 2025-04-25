@@ -14,16 +14,20 @@ import packageInfor from './package.json'
 export default async ({command, mode}) => {
     const envConfig = loadEnv(mode, './')
     const p = {
-        artus: {importStyle: true, plugins: [excludePublicFilesPlugin(['mars3d-cesium'])]},
+        artus: {importStyle: true,
+            plugins: [excludePublicFilesPlugin(['mars3d-cesium'])]
+        },
         qiankun: {
-            importStyle: false, plugins: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
-                useDevMode: true
-            })]
+            importStyle: false,
+            plugins: [
+                qiankunPlugin(packageInfor.name, {useDevMode: true}),
+                initHtml()
+            ]
         },
         dualmode: {
             importStyle: true, plugins: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
                 useDevMode: true
-            })]
+            }),initHtml()]
         },
         artusTemplate: {importStyle: true, plugins: []}
     }[envConfig.VITE_NODE_ENV]
@@ -62,7 +66,7 @@ export default async ({command, mode}) => {
             },
             disableHostCheck: true,
             //host: "localhost",
-           // port: 5177, // 端口号
+            // port: 5177, // 端口号
             proxy: {
                 '/api/': { // 可视化平台服务
                     target: 'http://139.186.201.161:8100/',
@@ -140,6 +144,18 @@ function injectScript (p) {
         s += `<link rel="stylesheet" href="//unpkg.com/element-plus/theme-chalk/dark/css-vars.css" /> `
     }
     return s
+}
+
+function initHtml () {
+    return {
+        name: 'init-html',
+        transformIndexHtml (html) {
+            const regex = /update\(props\)\);\s*(\s|.)*?}/
+            return html.replace(regex, () => {
+                return "update(props)); return}window.proxy.vitebootstrap(() => Promise.reject('资源错误'))"
+            });
+        }
+    }
 }
 
 function excludePublicFilesPlugin (excludePaths) {

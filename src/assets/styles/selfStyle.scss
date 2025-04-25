@@ -1,0 +1,24 @@
+.basic-box {
+  background:  $bg-black-2a2b2f;
+}
+.box-template {
+  padding: 20px 10px;
+  background: #36373a;
+  border: none;
+  border-radius: 8px;
+  height: inherit;
+}
+
+@font-face {
+  font-family: 'Scientific';
+  src: url('../../../public/fonts/DS-Digital.ttf');
+}
+@font-face {
+  font-family: 'black';src: url('../../../public/fonts/simhei.ttf');
+}
+@font-face {
+  font-family: "iconfont";
+  src: url('../../../public/fonts/iconfont.woff2?t=1646122993322') format('woff2'),
+  url('../../../public/fonts/iconfont.woff?t=1646122993322') format('woff'),
+  url('../../../public/fonts/iconfont.ttf?t=1646122993322') format('truetype');
+}

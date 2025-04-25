@@ -37,6 +37,11 @@ async function loadLayout (type) {
         artusComponents.componentConfig.namespace = 'why'
         return await import ('./App.vue')
     }
+    styleFun()
     return await import('./App2.vue')
 }
 
+const styleFun = async () => {
+    await import("@/assets/styles/selfStyle.scss")
+    await import ('element-plus/theme-chalk/dark/css-vars.css')
+}
