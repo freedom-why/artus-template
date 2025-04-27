@@ -3,6 +3,7 @@ import store from "@/store"
 
 let gateway = import.meta.env.VITE_GATEWAY
 let routerPatch = {
+    '/dataIntegration': () => import('@/views/dome/index.vue'),
     '/example': () => import('@/views/dome/index.vue')
 }
 
@@ -55,14 +56,14 @@ function List(list, routerListAll, rootGateWay) {
             component: () => import('@/layout/index.vue'),
             children: [
                 {
-                    path: '/example',
-                    name: '/example',
+                    path: '/dataIntegration',
+                    name: '/dataIntegration',
                     meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
                     component: routerPatch['/example']
                 },
                 {
-                    path: '/example1',
-                    name: '/example1',
+                    path: '/example',
+                    name: '/example',
                     meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
                     component: routerPatch['/example']
                 }

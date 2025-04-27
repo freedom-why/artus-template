@@ -26,8 +26,8 @@ const initQianKun = () => {
                 showImg && (BASE_API.showImg = showImg)
                 mapKey && (BASE_API.mapKey = mapKey)
                 mapJson && (BASE_API.mapJson = mapJson)
-                BASE_API.nameSpace = nameSpace || 'why'
             }
+            BASE_API.nameSpace = nameSpace || 'why'
             getInfor().then(({appInit}) => {
                 appInit(container, routerConfig, props).then((app) => {
                     instance = app

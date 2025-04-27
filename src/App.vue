@@ -13,6 +13,7 @@
 import {defineComponent} from 'vue'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import BASE_API from '@/api/config.js'
+
 export default defineComponent({
   setup() {
     return {

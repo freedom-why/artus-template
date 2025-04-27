@@ -18,7 +18,7 @@ export default async ({command, mode}) => {
         artus: {
             importStyle: true,
             plugins: [excludePublicFilesPlugin(['mars3d-cesium'])],
-            additionalData: `@import "@/assets/styles/variables.scss";@import "@/assets/styles/selfStyle.scss";`
+            additionalData: `@import "@/assets/styles/selfStyle.scss";`
         },
         qiankun: {
             importStyle: false,
@@ -26,18 +26,17 @@ export default async ({command, mode}) => {
                 qiankunPlugin(packageInfor.name, {useDevMode: true}),
                 initHtml()
             ],
-            additionalData: `@import "@/assets/styles/variables.scss";`
+            additionalData: ''
         },
         dualmode: {
-            importStyle: true, plugins: [qiankunPlugin(packageInfor.name, { // 微应用名字，与主应用注册的微应用名字保持一致
-                useDevMode: true,
-                additionalData: `@import "@/assets/styles/variables.scss";@import "@/assets/styles/selfStyle.scss";`
-            }), initHtml()]
+            importStyle: true,
+            plugins: [qiankunPlugin(packageInfor.name, {useDevMode: true,}), initHtml()],
+            additionalData: `@import "@/assets/styles/selfStyle.scss";`
         },
-        artusTemplate: {importStyle: true, plugins: [],  additionalData: `@import "@/assets/styles/variables.scss";@import "@/assets/styles/selfStyle.scss";`}
+        artusTemplate: {importStyle: true, plugins: [], additionalData: `@import "@/assets/styles/selfStyle.scss";`}
     }
     const modeType = p[envConfig.VITE_NODE_ENV]
-        console.log(modeType.additionalData)
+    console.log(envConfig.VITE_INPUT)
     return defineConfig({
         define: {
             'process.env': {}
@@ -58,7 +57,7 @@ export default async ({command, mode}) => {
             preprocessorOptions: {
                 scss: {
                     //注意这里sass变成了scss
-                    additionalData: modeType.additionalData
+                    additionalData: `@import "@/assets/styles/variables.scss";${modeType.additionalData}`
                 }
             }
         },
@@ -115,7 +114,7 @@ export default async ({command, mode}) => {
             createHtmlPlugin({
                 minify: true,
                 filename: "index",//该项默认是template文件名
-                entry: envConfig.VITE_INPUT || 'src/main.js',
+                entry: envConfig.VITE_INPUT,
                 template: "./index.html",
                 inject: {
                     data: {
@@ -147,6 +146,7 @@ export default async ({command, mode}) => {
 function injectScript (p) {
     let s = ''
     if (p.importStyle) {
+        s += `<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" /> `
         s += `<link rel="stylesheet" href="//unpkg.com/element-plus/theme-chalk/dark/css-vars.css" /> `
     }
     return s
@@ -158,7 +158,7 @@ function initHtml () {
         transformIndexHtml (html) {
             const regex = /update\(props\)\);\s*(\s|.)*?}/
             return html.replace(regex, () => {
-                return "update(props)); return}window.proxy.vitebootstrap(() => Promise.reject('资源错误'))"
+                return "update(props)); return}window.proxy?.vitebootstrap?.(() => Promise.reject('资源错误'))"
             });
         }
     }
