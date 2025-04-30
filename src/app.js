@@ -12,20 +12,17 @@ import * as directive from '@/directive/auth'
 export function appInit (container, routerConfig = {}, props) {
     return new Promise(resolve => {
         loadLayout(container).then(d => {
-            let app = createApp(d.default, {
-                style: 'padding:10px',
-            })
+            let app = createApp(d.default)
             app.use(artusComponents.default)
             app.use(router(routerConfig, props))
             app.use(store)
-            app.config.globalProperties.$option = filters.$option
-            app.config.globalProperties.$filter = filters.$filter
             for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
                 app.component(key, component)
             }
             app.mount('#app')
             app.directive(directive.name, directive.fun)
             artusComponents.componentConfig.auth = directive.fun
+            artusComponents.componentConfig.filter = filters.$filter
             resolve(app)
         })
 

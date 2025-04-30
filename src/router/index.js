@@ -3,8 +3,10 @@ import store from "@/store"
 
 let gateway = import.meta.env.VITE_GATEWAY
 let routerPatch = {
-    '/dataIntegration': () => import('@/views/dome/index.vue'),
-    '/example': () => import('@/views/dome/index.vue')
+    '/example': () => import('@/views/dome/index.vue'),
+    '/example1': () => import('@/views/dome/index1.vue'),
+    '/example2': () => import('@/views/dome/index2.vue'),
+    '/example3': () => import('@/views/dome/index3.vue')
 }
 
 
@@ -56,16 +58,28 @@ function List(list, routerListAll, rootGateWay) {
             component: () => import('@/layout/index.vue'),
             children: [
                 {
-                    path: '/dataIntegration',
-                    name: '/dataIntegration',
-                    meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
+                    path: '/example',
+                    name: '/example',
+                    meta: {title: '布局1', btnJurisdiction: ['change', 'delete']},
                     component: routerPatch['/example']
                 },
                 {
-                    path: '/example',
-                    name: '/example',
-                    meta: {title: '示例', btnJurisdiction: ['change', 'delete']},
-                    component: routerPatch['/example']
+                    path: '/example1',
+                    name: '/example1',
+                    meta: {title: '布局2', btnJurisdiction: ['change', 'delete']},
+                    component: routerPatch['/example1']
+                },
+                {
+                    path: '/example2',
+                    name: '/example2',
+                    meta: {title: '布局3', btnJurisdiction: ['change', 'delete']},
+                    component: routerPatch['/example2']
+                },
+                {
+                    path: '/example3',
+                    name: '/example3',
+                    meta: {title: '布局4', btnJurisdiction: ['change', 'delete']},
+                    component: routerPatch['/example3']
                 }
             ]
         }

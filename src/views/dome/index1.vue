@@ -1,5 +1,5 @@
 <template>
-<LeftRightLayout leftWith="300px">
+<LeftRightLayout :templateHeader="false">
   <template #header>
     <div v-auth="'change'" class="">
       <el-button type="primary">按钮模板</el-button>

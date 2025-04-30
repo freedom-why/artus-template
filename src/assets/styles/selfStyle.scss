@@ -1,14 +1,90 @@
 .basic-box {
   background:  $bg-black-2a2b2f;
 }
-.box-template {
-  padding: 20px 10px;
-  background: #36373a;
-  border: none;
-  border-radius: 8px;
-  height: inherit;
+
+.template-style .header-btn-box, .template-style .body-btn-box {
+  background-color: #36373a;
+
 }
 
+.template-style  .template-left {
+  background-color: #36373a;
+
+}
+
+.template-style  .template-right {
+  background-color: #36373a;
+
+}
+.title--name {
+  color: #fff;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  padding: 0 15px 0;
+
+  &::before {
+    content: " ";
+    width: 2px;
+    height: 100%;
+    background: var(--ORIGINAL_THEME, #409EFF);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+.template-style {
+  color: #999;
+  margin: 10px;
+  height: calc(100% - 20px)!important;
+  border-radius: 4px;
+  .header-btn-box {
+    padding: 10px 15px;
+    width: 100%;
+    height: 50px;
+
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    .header-box {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .template-content {
+    padding: 10px;
+    background-color: $bg-black-2a2b2f;
+    height: calc(100% - 65px);
+    border-radius: 4px;
+  }
+  .contentHeight{
+    height: 100%!important;
+  }
+  .betweenMain{
+    height: calc(100% - 65px);
+  }
+  .template-left{
+    height: 100%;
+    padding: 15px;
+    border-radius: 4px;
+
+
+  }
+  .template-right{
+    height: 100%;
+    padding: 15px;
+    margin-left: 10px;
+    width: 100%;
+    border-radius: 4px;
+  }
+}
+.padding-15{
+  padding: 15px;
+}
 @font-face {
   font-family: 'Scientific';
   src: url('../../../public/fonts/DS-Digital.ttf');

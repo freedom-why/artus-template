@@ -36,7 +36,6 @@ export default async ({command, mode}) => {
         artusTemplate: {importStyle: true, plugins: [], additionalData: `@import "@/assets/styles/selfStyle.scss";`}
     }
     const modeType = p[envConfig.VITE_NODE_ENV]
-    console.log(envConfig.VITE_INPUT)
     return defineConfig({
         define: {
             'process.env': {}

@@ -36,14 +36,12 @@ const {options: {routes}} = useRouter()
 <style lang="scss" scoped>
 .box-style {
   height: 100%;
-  padding: 10px;
 }
 
 .left-nav-style {
   width: 200px;
   position: relative;
   padding: 15px;
-  margin-right: 15px;
   background: rgb(36, 37, 38);
   border-radius: 8px;
   height: 100%;
