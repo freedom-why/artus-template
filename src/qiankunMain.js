@@ -37,8 +37,8 @@ const initQianKun = () => {
         bootstrap() { //activeRule = 乾坤路由规则 ，systemLogo系统图标， 左下小导航
         },
         unmount() {
-            if (instance && instance.$destroy) {
-                instance.$destroy()
+            if (instance && instance.unmount) {
+                instance.unmount()
                 instance = null
             }
         }
