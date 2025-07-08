@@ -2,8 +2,7 @@
   <div style="height: 100%;">
     <el-config-provider :locale="locale" :namespace="nameSpace">
       <router-view v-slot="{ Component,route }">
-        <transition name="animate__animated animate__fadeIn" mode="out-in"
-                    enter-active-class="animate__fadeIn" leave-active-class="animate__fadeOut">
+        <transition name="fade-transform">
           <component  :is="Component" :key="route.name"/>
         </transition>
       </router-view>
