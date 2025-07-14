@@ -3,7 +3,7 @@ import store from "@/store"
 
 let gateway = import.meta.env.VITE_GATEWAY
 let routerPatch = {
-    '/example': () => import('@/views/dome/index.vue'),
+    '/dataOrigin': () => import('@/views/dome/index.vue'),
     '/example1': () => import('@/views/dome/index1.vue'),
     '/example2': () => import('@/views/dome/index2.vue'),
     '/example3': () => import('@/views/dome/index3.vue')

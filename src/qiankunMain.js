@@ -1,17 +1,17 @@
-import {qiankunWindow, renderWithQiankun} from "vite-plugin-qiankun/dist/helper"
+import { qiankunWindow, renderWithQiankun } from "vite-plugin-qiankun/dist/helper"
 import BASE_API from '@/api/config.js'
 
 let instance = null
 
 
-async function getInfor() {
+async function getInfor () {
     return await import("./app")
 }
 
 const initQianKun = () => {
     window.CESIUM_BASE_URL = qiankunWindow.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ + "mars3d-cesium/"
     renderWithQiankun({
-        mount(props) {
+        mount (props) {
             const {
                 container, routerConfig,
                 api: {
@@ -34,9 +34,9 @@ const initQianKun = () => {
                 })
             })
         },
-        bootstrap() { //activeRule = 乾坤路由规则 ，systemLogo系统图标， 左下小导航
+        bootstrap () { //activeRule = 乾坤路由规则 ，systemLogo系统图标， 左下小导航
         },
-        unmount() {
+        unmount () {
             if (instance && instance.unmount) {
                 instance.unmount()
                 instance = null

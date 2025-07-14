@@ -19,6 +19,7 @@ export function appInit (container, routerConfig = {}, props) {
             for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
                 app.component(key, component)
             }
+            container && app.provide('cachedViews', props.cachedViews)
             app.mount('#app')
             app.directive(directive.name, directive.fun)
             artusComponents.componentConfig.auth = directive.fun
