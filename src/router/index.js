@@ -86,10 +86,10 @@ function List(list, routerListAll, rootGateWay) {
     ]
 }
 
-function init({activeRule, routerList, routerListAll}, props) {
+function init({activeRule, getRouterList, routerListAll}, props) {
     const router = createRouter({
         history: createWebHistory(activeRule || gateway),
-        routes: List(routerList, routerListAll, props?.rootGateWay)
+        routes: List(getRouterList(), routerListAll, props?.rootGateWay)
     })
     if (props) {
         router.afterEach(() => {
